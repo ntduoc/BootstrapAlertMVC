@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts{
+    <script>
+        $(function () {           
+            $('#AlertBox').removeClass('hide');
+            $('#AlertBox').delay(2000).slideUp(500);
+        });
+
+    </script>
+    }
+- 
+<div class="row">
+
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div id="AlertBox" class="alert @TempData["AlertType"] hide" role="alert">
+            @TempData["AlertMessage"]
+        </div>
+    }
+
+
+    <div class="col-md-4">
+        <h2>Check Alert</h2>        
+        @using(Html.BeginForm("Index","Home",FormMethod.Post,new { enctype = "multipart/formdata" }))
+        {
+            <div class="form-group">
+                <select id="type" name="type" class="form-control">
+                    <option value="0">--- Select type ---</option>
+                    <option value="1">Success</option>
+                    <option value="2">Warning</option>
+                    <option value="3">Danger</option>
+                </select>               
+            </div>
+            <input type="submit" name="check" value="Check" class="btn btn-primary" />
+        }
+    </div>
+</div>
